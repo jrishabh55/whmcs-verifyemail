@@ -1,4 +1,14 @@
 <?php
+/**
+ * Verify Email
+ *
+ * @package    Verify Email
+ * @author     Rishabh Jain <rishabh@jnexsoft.com>
+ * @copyright  Copyright (c) JNEX Software Solutions 2016-2017
+ * @license    MIT
+ * @version    1.1
+ * @link       http://www.jnexsoft.com/
+ */
 
 namespace JNEX;
 

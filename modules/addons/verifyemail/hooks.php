@@ -1,16 +1,16 @@
 <?php
 /**
- * HSR Verify Email
+ * Verify Email
  *
- * @package    HSR Verify Email
- * @author     Rishabh Jain <jrishabh55@gmail.com>
- * @copyright  Copyright (c) HSRTECH 2016
- * @license    ------- Yet To Decide -------
- * @version    1.0
- * @link       http://www.hsrtech.com/
+ * @package    Verify Email
+ * @author     Rishabh Jain <rishabh@jnexsoft.com>
+ * @copyright  Copyright (c) JNEX Software Solutions 2016-2017
+ * @license    MIT
+ * @version    1.1
+ * @link       http://www.jnexsoft.com/
  */
 
- if (!defined("WHMCS")) die("This file cannot be accessed directly");
+if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
 require_once __DIR__.'/includes.php';
 
@@ -30,4 +30,3 @@ if($setting->value == 'on')
         'ClientLogin',
     ]);
 }
-
