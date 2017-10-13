@@ -15,18 +15,19 @@
 require_once __DIR__.'/includes.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use JNEX\Hooks;
 
 $setting = Capsule::table('tbladdonmodules')
-                ->where('module','=','hsrverifyemail')
+                ->where('module','=','verifyemail')
                 ->where('setting','=','activate')
                 ->first();
 
-if($setting->value == 'yes')
+if($setting->value == 'on')
 {
 
-    use HSR\Hooks;
     Hooks::init()->addHooks([
         'ClientAdd',
         'ClientLogin',
     ]);
-} 
+}
+

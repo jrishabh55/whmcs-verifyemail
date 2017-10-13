@@ -1,13 +1,13 @@
 <?php
 
-namespace HSR;
+namespace JNEX;
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
 use HSR\Email;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-class Hooks{
+class Hooks {
 
 	protected $admin;
 
@@ -16,8 +16,7 @@ class Hooks{
 	public function __construct()
 	{
 		$this->admin = Capsule::table('tbladmins')->first()->username;
-        $sysurl = Capsule::table('tblconfiguration')->where('setting','=','SystemURL')->value;
-        $this->sysurl = $sysurl;
+        $this->sysurl = JNEX_URL;
 	}
 
 	public static function init()
@@ -27,11 +26,10 @@ class Hooks{
 
 	public function addHooks($hooks)
 	{
-		if(count($hooks)){		
+		if(count($hooks)){
 			foreach($hooks as $hook)
 			{
-				add_hook($hook,1,function($vars) use ($hook)
-				{
+				add_hook($hook,1,function($vars) use ($hook) {
 					call_user_func([$this,'Hook'.$hook],$vars);
 				});
 			}
@@ -48,7 +46,7 @@ class Hooks{
         $user = Capsule::table('tblclients')
             ->where('id','=',$vars['userid'])
             ->first();
-        
+
         if($user->email_verified)
         {
             return;
@@ -58,22 +56,22 @@ class Hooks{
         unset($_SESSION['cid']);
         unset($_SESSION['upw']);
 
-        header("Location: ".$this->sysurl.'/hsrverifyemail.php?status=false');
+        header("Location: ".$this->sysurl.'verifyemail.php?status=false');
         exit();
     }
 
     public function HookClientLogout($vars)
     {
-        $clinet = Capsule::table('hsrverifyemail')
+        $client = Capsule::table(JNEX_TABLENAME)
         ->where('client_id','=',$vars['userid'])
-        ->where('status','=','0');
+        ->where('status','=','0')->first();
 
-        if(!$clinet)
+        if(!$client)
             return true;
-        
+
         echo "Please activate your profile before going forward.";
         exit();
-        
+
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace HSR;
+namespace JNEX;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -10,13 +10,15 @@ class Email
 
     public static function send($cid)
     {
-		$adminuser = Capsule::table('tbladmins')->first()->username;
-        
+		    $adminuser = Capsule::table('tbladmins')->first()->username;
+
         $link = Capsule::table('tbltransientdata')->where('name','=',$cid.':emailVerificationClientKey')->first()->data;
+
         $command = "sendemail";
         $values["messagename"] = "Client Email Address Verification";
-        $values['customvars'] = ['client_email_verification_link' => 'https://vezel.thestack.net/clientarea.php?verificationId='.$link];
+        $id = JNEX_SEPERATOR.$cid;
+        $values['customvars'] = ['client_email_verification_link' => JNEX_URL.'verifyemail.php?verificationId='.$link.$id];
         $values["id"] = $cid;
-        return localAPI($command, $values, $adminuser); 
+        return localAPI($command, $values, $adminuser);
     }
 }
