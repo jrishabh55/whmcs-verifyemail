@@ -14,7 +14,7 @@ namespace JNEX;
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
-use HSR\Email;
+use JNEX\Email;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Hooks {
