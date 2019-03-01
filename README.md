@@ -1,3 +1,5 @@
+#Project is no longer maintained.
+
 # Whmcs-verifyemail
 This module is built for WHMCS to force the email verification before logging in.
 
